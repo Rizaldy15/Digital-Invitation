@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Aldi</title>
+    <style>
+        /* ============================
+           CSS / STYLING DASAR
+           ============================ */
+        :root {
+            --primary: #cba876; /* Warna emas/coklat elegan */
+            --bg-color: #faf9f6; /* Warna latar off-white */
+            --text-color: #333;
+        }
+        body, html { 
+            margin: 0; padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Level 1: Cover Depan (Hero Section) */
+        #cover { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
+            background: #fff; /* Bisa diganti gambar background */
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            z-index: 9999; transition: transform 1s ease-in-out; text-align: center; padding: 20px;
+            box-sizing: border-box;
+        }
+        #cover h1 { font-size: 2.5em; color: var(--primary); margin-bottom: 10px;}
+        #cover p { margin: 5px 0; font-size: 1.2em; }
+        .guest-name { font-weight: bold; font-size: 1.5em; margin: 20px 0; }
+        .btn { 
+            background: var(--primary); color: #fff; padding: 12px 24px; 
+            border: none; border-radius: 25px; font-size: 1.1em; 
+            cursor: pointer; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn:hover { background: #b08d55; }
+
+        /* Struktur Konten Utama */
+        #main-content { display: none; padding-bottom: 100px; }
+        section { padding: 60px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
+        h2 { color: var(--primary); font-size: 2em; margin-bottom: 20px;}
+
+        /* Level 2: Animasi Scroll (Reveal) */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Level 1: Profil */
+        .couple-wrapper { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
+        .person { width: 45%; min-width: 250px; }
+        .person img { 
+            width: 150px; height: 150px; border-radius: 50%; 
+            object-fit: cover; border: 3px solid var(--primary); 
+        }
+        
+        /* Level 2: Countdown */
+        .countdown-wrapper { display: flex; justify-content: center; gap: 15px; margin: 30px 0; flex-wrap: wrap;}
+        .time-box { 
+            background: var(--primary); color: white; padding: 15px; 
+            border-radius: 10px; min-width: 60px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .time-box span { display: block; font-size: 2em; font-weight: bold; }
+
+        /* Level 1: Galeri Grid */
+        .gallery-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 10px; margin-top: 20px; 
+        }
+        .gallery-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+
+        /* Level 2: Amplop Digital */
+        .bank-box { background: #fff; padding: 20px; border-radius: 10px; margin: 10px auto; max-width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #ddd;}
+        
+        /* Level 2: Floating Music Button */
+        #music-btn { 
+            position: fixed; bottom: 20px; right: 20px; 
+            background: var(--primary); color: white; border: none; 
+            border-radius: 50%; width: 50px; height: 50px; font-size: 20px; 
+            cursor: pointer; z-index: 1000; display: none; box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+        }
+
+        /* Level 2: Form RSVP */
+        form { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto; }
+        input, select, textarea { 
+            padding: 12px; border: 1px solid #ccc; border-radius: 5px; 
+            width: 100%; box-sizing: border-box; font-family: inherit;
+        }
+        
+        /* Level 1: Peta Iframe */
+        .map-container { width: 100%; height: 300px; border-radius: 10px; overflow: hidden; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- ============================
+         BAGIAN COVER & NAMA TAMU
+         ============================ -->
+    <div id="cover">
+        <h1>Pernikahan Aldi & Dinda</h1>
+        <p>15 Agustus 2026</p>
+        <p>Kpd Bpk/Ibu/Saudara/i:</p>
+        <!-- Nama tamu di bawah ini akan berubah sesuai URL ?to=Nama -->
+        <div class="guest-name" id="guest-name">Tamu Undangan</div>
+        <button class="btn" onclick="bukaUndangan()">Buka Undangan</button>
+    </div>
+
+    <!-- ============================
+         MUSIK LATAR 
+         ============================ -->
+    <button id="music-btn" onclick="toggleMusic()">🎵</button>
+    <!-- Ganti link .mp3 di bawah ini dengan musik pilihan Anda -->
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="main-content">
+        <!-- Level 1: Kutipan (Quote) -->
+        <section class="reveal">
+            <h2>Kutipan</h2>
+            <p><i>"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya..."</i></p>
+            <p><b>(QS. Ar-Rum: 21)</b></p>
+        </section>
+
+        <!-- Level 1: Profil Mempelai -->
+        <section class="reveal">
+            <h2>Mempelai</h2>
+            <div class="couple-wrapper">
+                <div class="person">
+                    <!-- Ganti link gambar dengan foto asli -->
+                    <img src="https://via.placeholder.com/150" alt="Groom">
+                    <h3>Aldi</h3>
+                    <p>Putra dari Bpk. Fulan & Ibu Fulanah</p>
+                </div>
+                <div class="person">
+                    <img src="https://via.placeholder.com/150" alt="Bride">
+                    <h3>Dinda</h3>
+                    <p>Putri dari Bpk. Fulan & Ibu Fulanah</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Level 1 & 2: Detail Acara & Countdown & Maps -->
+        <section class="reveal">
+            <h2>Waktu & Tempat</h2>
+            
+            <div class="countdown-wrapper" id="countdown">
+                <div class="time-box"><span id="hari">00</span>Hari</div>
+                <div class="time-box"><span id="jam">00</span>Jam</div>
+                <div class="time-box"><span id="menit">00</span>Menit</div>
+                <div class="time-box"><span id="detik">00</span>Detik</div>
+            </div>
+
+            <h3>Akad Nikah</h3>
+            <p>Sabtu, 15 Agustus 2026<br>08.00 WIB - Selesai</p>
+            <h3>Resepsi</h3>
+            <p>Sabtu, 15 Agustus 2026<br>11.00 WIB - 14.00 WIB</p>
+            <p><b>Gedung Serbaguna Jakarta</b><br>Jl. Contoh Alamat No. 123, Jakarta</p>
+            
+            <div class="map-container">
+                <!-- Ganti src di bawah ini dengan Embed Map asli dari Google Maps -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.666427009772!2d106.82715281476884!3d-6.175392395529199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2ad6e1e0e9bcc8!2sMonumen%20Nasional!5e0!3m2!1sid!2sid!4v1629871234567!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <!-- Level 1: Galeri Foto -->
+        <section class="reveal">
+            <h2>Galeri Foto</h2>
+            <div class="gallery-grid">
+                <img src="https://via.placeholder.com/300x200" alt="Gallery 1">
+                <img src="https://via.placeholder.com/300x200" alt="Gallery 2">
+                <img src="https://via.placeholder.com/300x200" alt="Gallery 3">
+                <img src="https://via.placeholder.com/300x200" alt="Gallery 4">
+            </div>
+        </section>
+
+        <!-- Level 2: Amplop Digital -->
+        <section class="reveal">
+            <h2>Amplop Digital</h2>
+            <p>Bagi keluarga dan sahabat yang ingin memberikan tanda kasih, dapat melalui rekening berikut:</p>
+            <div class="bank-box">
+                <h3>BCA</h3>
+                <p id="norek" style="font-size: 1.5em; font-weight: bold;">1234567890</p>
+                <p>a.n Aldi</p>
+                <button class="btn" onclick="salinRekening()">Salin No. Rekening</button>
+            </div>
+        </section>
+
+        <!-- Level 1: Protokol / Dresscode -->
+        <section class="reveal">
+            <h2>Informasi Tambahan</h2>
+            <p>👔 <b>Dresscode:</b> Nuansa Putih atau Coklat Susu (Pastel).</p>
+            <p>😷 <b>Protokol Kesehatan:</b> Mohon untuk tetap menjaga kebersihan dan kesehatan selama acara berlangsung.</p>
+        </section>
+
+        <!-- Level 2: RSVP -->
+        <section class="reveal">
+            <h2>RSVP & Ucapan</h2>
+            <form id="rsvp-form">
+                <input type="text" id="nama" placeholder="Nama Anda" required>
+                <select id="kehadiran" required>
+                    <option value="">Pilih Kehadiran</option>
+                    <option value="Hadir">Akan Hadir</option>
+                    <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
+                </select>
+                <textarea id="ucapan" rows="4" placeholder="Tulis ucapan/doa disini..."></textarea>
+                <button type="submit" class="btn">Kirim RSVP</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- ============================
+         JAVASCRIPT
+         ============================ -->
+    <script>
+        // 1. Fitur Nama Tamu dari URL
+        // Cara tes: Buka di browser dengan url "index.html?to=Budi+Santoso"
+        const urlParams = new URLSearchParams(window.location.search);
+        const to = urlParams.get('to');
+        if (to) {
+            document.getElementById('guest-name').innerText = to.replace(/\+/g, ' ');
+        }
+
+        // 2. Fungsi Buka Undangan & Play Music
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        let isPlaying = false;
+
+        function bukaUndangan() {
+            document.getElementById('cover').style.transform = 'translateY(-100vh)';
+            document.getElementById('main-content').style.display = 'block';
+            musicBtn.style.display = 'block';
+            music.play();
+            isPlaying = true;
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerText = '🔇';
+            } else {
+                music.play();
+                musicBtn.innerText = '🎵';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 3. Penghitung Mundur (Countdown)
+        // Ganti format tanggal di bawah sesuai tanggal acara Anda (Bulan Tanggal, Tahun Jam:Menit:Detik)
+        const targetDate = new Date("Aug 15, 2026 08:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance > 0) {
+                document.getElementById("hari").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("jam").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("menit").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("detik").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            } else {
+                document.getElementById("countdown").innerHTML = "<h3>Acara Sedang Berlangsung!</h3>";
+            }
+        }, 1000);
+
+        // 4. Salin Nomor Rekening
+        function salinRekening() {
+            const norek = document.getElementById('norek').innerText;
+            navigator.clipboard.writeText(norek).then(() => {
+                alert('Nomor rekening berhasil disalin!');
+            });
+        }
+
+        // 5. Animasi Scroll (Scroll Reveal menggunakan Intersection Observer)
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.15, 
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active'); // Tambah class .active jika elemen terlihat
+                observer.unobserve(entry.target); // Animasi diputar 1x saja
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => {
+            revealOnScroll.observe(reveal);
+        });
+
+        // 6. Formulir RSVP (Google Sheets API Integration Placeholder)
+        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const btn = this.querySelector('button');
+            btn.innerText = 'Mengirim...';
+            
+            /* CATATAN: 
+               Ini adalah logika pengiriman. Nanti Anda perlu membuat Google Form/Sheet,
+               lalu mendapatkan URL Web App dari Google Apps Script untuk ditempel di sini.
+            */
+            const scriptURL = 'URL_GOOGLE_APPS_SCRIPT_ANDA_DISINI'; 
+            
+            // Simulasikan pengiriman sukses (karena URL Google Script belum Anda set)
+            setTimeout(() => {
+                alert('Terima kasih! RSVP Anda telah terkirim.');
+                this.reset();
+                btn.innerText = 'Kirim RSVP';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
