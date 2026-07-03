@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Invitation</title>
+    <script>
+        // Level 3: Deteksi tema tersimpan/preferensi sistem sebelum halaman dirender,
+        // supaya tidak ada "kedipan" warna saat pertama kali dibuka.
+        (function() {
+            try {
+                const saved = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) { /* localStorage tidak tersedia, gunakan mode terang default */ }
+        })();
+    </script>
     <style>
         /* ============================
            CSS / STYLING DASAR
@@ -12,7 +25,21 @@
             --primary: #cba876; /* Warna emas/coklat elegan */
             --bg-color: #faf9f6; /* Warna latar off-white */
             --text-color: #333;
+            --card-bg: #ffffff;
+            --border-color: #dddddd;
+            --shadow-color: rgba(0,0,0,0.1);
         }
+
+        /* Level 3: Palet warna untuk Dark Mode */
+        [data-theme="dark"] {
+            --primary: #d9bb8c;
+            --bg-color: #191714;
+            --text-color: #ece6da;
+            --card-bg: #262220;
+            --border-color: #3d3831;
+            --shadow-color: rgba(0,0,0,0.4);
+        }
+
         body, html { 
             margin: 0; padding: 0; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -20,14 +47,15 @@
             color: var(--text-color); 
             overflow-x: hidden; 
             scroll-behavior: smooth;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
         
         /* Level 1: Cover Depan (Hero Section) */
         #cover { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
-            background: #fff; /* Bisa diganti gambar background */
+            background: var(--bg-color); /* Bisa diganti gambar background */
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            z-index: 9999; transition: transform 1s ease-in-out; text-align: center; padding: 20px;
+            z-index: 9999; transition: transform 1s ease-in-out, background-color 0.4s ease; text-align: center; padding: 20px;
             box-sizing: border-box;
         }
         #cover h1 { font-size: 2.5em; color: var(--primary); margin-bottom: 10px;}
@@ -61,7 +89,7 @@
         .countdown-wrapper { display: flex; justify-content: center; gap: 15px; margin: 30px 0; flex-wrap: wrap;}
         .time-box { 
             background: var(--primary); color: white; padding: 15px; 
-            border-radius: 10px; min-width: 60px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px; min-width: 60px; box-shadow: 0 4px 6px var(--shadow-color);
         }
         .time-box span { display: block; font-size: 2em; font-weight: bold; }
 
@@ -73,7 +101,7 @@
         .gallery-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
 
         /* Level 2: Amplop Digital */
-        .bank-box { background: #fff; padding: 20px; border-radius: 10px; margin: 10px auto; max-width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #ddd;}
+        .bank-box { background: var(--card-bg); padding: 20px; border-radius: 10px; margin: 10px auto; max-width: 400px; box-shadow: 0 4px 6px var(--shadow-color); border: 1px solid var(--border-color); transition: background-color 0.4s ease, border-color 0.4s ease;}
         
         /* Level 2: Floating Music Button */
         #music-btn { 
@@ -82,6 +110,20 @@
             border-radius: 50%; width: 50px; height: 50px; font-size: 20px; 
             cursor: pointer; z-index: 1000; display: none; box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
         }
+
+        /* Level 3: Tombol Ganti Mode Gelap/Terang */
+        #theme-toggle {
+            position: fixed; top: 20px; right: 20px;
+            background: var(--card-bg); color: var(--primary);
+            border: 2px solid var(--primary); border-radius: 50%;
+            width: 44px; height: 44px; font-size: 18px;
+            cursor: pointer; z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.2s ease;
+        }
+        #theme-toggle:hover { transform: scale(1.1); }
+        #theme-toggle:active { transform: scale(0.95); }
 
         /* Level 2: Form RSVP */
         form { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto; }
@@ -109,6 +151,11 @@
     </div>
 
     <!-- ============================
+         LEVEL 3: TOMBOL MODE GELAP/TERANG
+         ============================ -->
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Ganti mode gelap/terang">🌙</button>
+
+    <!-- ============================
          MUSIK LATAR 
          ============================ -->
     <button id="music-btn" onclick="toggleMusic()">🎵</button>
@@ -131,12 +178,12 @@
             <div class="couple-wrapper">
                 <div class="person">
                     <!-- Ganti link gambar dengan foto asli -->
-                    <img src="https://via.placeholder.com/150" alt="Groom">
+                    <img src="/images/copy_aldy.jpg" alt="Groom">
                     <h3>Mas</h3>
                     <p>Putra dari Bpk. Fulan & Ibu Fulanah</p>
                 </div>
                 <div class="person">
-                    <img src="https://via.placeholder.com/150" alt="Bride">
+                    <img src="/images/diul_main1.png" alt="Bride">
                     <h3>Mba</h3>
                     <p>Putri dari Bpk. Fulan & Ibu Fulanah</p>
                 </div>
@@ -162,7 +209,7 @@
             
             <div class="map-container">
                 <!-- Ganti src di bawah ini dengan Embed Map asli dari Google Maps -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.666427009772!2d106.82715281476884!3d-6.175392395529199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2ad6e1e0e9bcc8!2sMonumen%20Nasional!5e0!3m2!1sid!2sid!4v1629871234567!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3190087754233!2d106.8149301!3d-6.2215992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f155cb07fafd%3A0xfb40974eecb9e54!2sMangkuluhur%20ARTOTEL%20Suites!5e0!3m2!1sen!2sid!4v1783085695905!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
         </section>
 
@@ -170,10 +217,10 @@
         <section class="reveal">
             <h2>Galeri Foto</h2>
             <div class="gallery-grid">
-                <img src="https://via.placeholder.com/300x200" alt="Gallery 1">
-                <img src="https://via.placeholder.com/300x200" alt="Gallery 2">
-                <img src="https://via.placeholder.com/300x200" alt="Gallery 3">
-                <img src="https://via.placeholder.com/300x200" alt="Gallery 4">
+                <img src="/images/blok-m.jpg" alt="Gallery 1">
+                <img src="/images/batamu_spc.jpg" alt="Gallery 2">
+                <img src="/images/pnck.jpg" alt="Gallery 3">
+                <img src="images/diulala.jpg"Gallery 4">
             </div>
         </section>
 
@@ -182,9 +229,9 @@
             <h2>Amplop Digital</h2>
             <p>Bagi keluarga dan sahabat yang ingin memberikan tanda kasih, dapat melalui rekening berikut:</p>
             <div class="bank-box">
-                <h3>BCA</h3>
-                <p id="norek" style="font-size: 1.5em; font-weight: bold;">1234567890</p>
-                <p>a.n Aldi</p>
+                <h3>BSI</h3>
+                <p id="norek" style="font-size: 1.5em; font-weight: bold;">8922773850</p>
+                <p>a.n Muhammad Rizaldy A</p>
                 <button class="btn" onclick="salinRekening()">Salin No. Rekening</button>
             </div>
         </section>
@@ -224,7 +271,31 @@
             document.getElementById('guest-name').innerText = to.replace(/\+/g, ' ');
         }
 
-        // 2. Fungsi Buka Undangan & Play Music
+        // 2. Level 3: Mode Gelap / Terang
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        function setToggleIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeToggleBtn.innerText = isDark ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                try { localStorage.setItem('theme', 'light'); } catch (e) {}
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+            }
+            setToggleIcon();
+        }
+
+        // Set ikon yang benar saat halaman pertama kali dimuat
+        // (atribut data-theme sudah ditentukan lebih dulu oleh script di <head>)
+        setToggleIcon();
+
+        // 3. Fungsi Buka Undangan & Play Music
         const music = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-btn');
         let isPlaying = false;
@@ -248,9 +319,9 @@
             isPlaying = !isPlaying;
         }
 
-        // 3. Penghitung Mundur (Countdown)
+        // 4. Penghitung Mundur (Countdown)
         // Ganti format tanggal di bawah sesuai tanggal acara Anda (Bulan Tanggal, Tahun Jam:Menit:Detik)
-        const targetDate = new Date("Aug 15, 2026 08:00:00").getTime();
+        const targetDate = new Date("Dec 31, 2027 08:00:00").getTime();
         setInterval(function() {
             const now = new Date().getTime();
             const distance = targetDate - now;
@@ -265,7 +336,7 @@
             }
         }, 1000);
 
-        // 4. Salin Nomor Rekening
+        // 5. Salin Nomor Rekening
         function salinRekening() {
             const norek = document.getElementById('norek').innerText;
             navigator.clipboard.writeText(norek).then(() => {
@@ -273,7 +344,7 @@
             });
         }
 
-        // 5. Animasi Scroll (Scroll Reveal menggunakan Intersection Observer)
+        // 6. Animasi Scroll (Scroll Reveal menggunakan Intersection Observer)
         const reveals = document.querySelectorAll('.reveal');
         const revealOptions = {
             threshold: 0.15, 
@@ -291,7 +362,7 @@
             revealOnScroll.observe(reveal);
         });
 
-        // 6. Formulir RSVP (Google Sheets API Integration Placeholder)
+        // 7. Formulir RSVP (Google Sheets API Integration Placeholder)
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
             e.preventDefault(); 
             const btn = this.querySelector('button');
