@@ -1,0 +1,116 @@
+/* ============================
+   CSS / STYLING DASAR
+   ============================ */
+:root {
+    --primary: #cba876;
+    --bg-color: #faf9f6;
+    --text-color: #333;
+    --card-bg: #ffffff;
+    --border-color: #dddddd;
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+/* Level 3: Palet warna untuk Dark Mode */
+[data-theme="dark"] {
+    --primary: #d9bb8c;
+    --bg-color: #191714;
+    --text-color: #ece6da;
+    --card-bg: #262220;
+    --border-color: #3d3831;
+    --shadow-color: rgba(0,0,0,0.4);
+}
+
+body, html { 
+    margin: 0; padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    overflow-x: hidden; 
+    scroll-behavior: smooth;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Level 1: Cover Depan (Hero Section) */
+#cover { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
+    background: var(--bg-color); 
+    display: flex; flex-direction: column; justify-content: center; align-items: center; 
+    z-index: 9999; transition: transform 1s ease-in-out, background-color 0.4s ease; text-align: center; padding: 20px;
+    box-sizing: border-box;
+}
+#cover h1 { font-size: 2.5em; color: var(--primary); margin-bottom: 10px;}
+#cover p { margin: 5px 0; font-size: 1.2em; }
+.guest-name { font-weight: bold; font-size: 1.5em; margin: 20px 0; }
+.btn { 
+    background: var(--primary); color: #fff; padding: 12px 24px; 
+    border: none; border-radius: 25px; font-size: 1.1em; 
+    cursor: pointer; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.btn:hover { background: #b08d55; }
+
+/* Struktur Konten Utama */
+#main-content { display: none; padding-bottom: 100px; }
+section { padding: 60px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
+h2 { color: var(--primary); font-size: 2em; margin-bottom: 20px;}
+
+/* Level 2: Animasi Scroll (Reveal) */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Level 1: Profil */
+.couple-wrapper { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
+.person { width: 45%; min-width: 250px; }
+.person img { 
+    width: 150px; height: 150px; border-radius: 50%; 
+    object-fit: cover; border: 3px solid var(--primary); 
+}
+
+/* Level 2: Countdown */
+.countdown-wrapper { display: flex; justify-content: center; gap: 15px; margin: 30px 0; flex-wrap: wrap;}
+.time-box { 
+    background: var(--primary); color: white; padding: 15px; 
+    border-radius: 10px; min-width: 60px; box-shadow: 0 4px 6px var(--shadow-color);
+}
+.time-box span { display: block; font-size: 2em; font-weight: bold; }
+
+/* Level 1: Galeri Grid */
+.gallery-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 10px; margin-top: 20px; 
+}
+.gallery-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+
+/* Level 2: Amplop Digital */
+.bank-box { background: var(--card-bg); padding: 20px; border-radius: 10px; margin: 10px auto; max-width: 400px; box-shadow: 0 4px 6px var(--shadow-color); border: 1px solid var(--border-color); transition: background-color 0.4s ease, border-color 0.4s ease;}
+
+/* Level 2: Floating Music Button */
+#music-btn { 
+    position: fixed; bottom: 20px; right: 20px; 
+    background: var(--primary); color: white; border: none; 
+    border-radius: 50%; width: 50px; height: 50px; font-size: 20px; 
+    cursor: pointer; z-index: 1000; display: none; box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+}
+
+/* Level 3: Tombol Ganti Mode Gelap/Terang */
+#theme-toggle {
+    position: fixed; top: 20px; right: 20px;
+    background: var(--card-bg); color: var(--primary);
+    border: 2px solid var(--primary); border-radius: 50%;
+    width: 44px; height: 44px; font-size: 18px;
+    cursor: pointer; z-index: 10000;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.2s ease;
+}
+#theme-toggle:hover { transform: scale(1.1); }
+#theme-toggle:active { transform: scale(0.95); }
+
+/* Level 2: Form RSVP */
+form { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto; }
+input, select, textarea { 
+    padding: 12px; border: 1px solid #ccc; border-radius: 5px; 
+    width: 100%; box-sizing: border-box; font-family: inherit;
+}
+
+/* Level 1: Peta Iframe */
+.map-container { width: 100%; height: 300px; border-radius: 10px; overflow: hidden; margin-top: 20px; }
