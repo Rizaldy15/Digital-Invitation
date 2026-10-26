@@ -1,4 +1,4 @@
-// Tema biru malam ditetapkan langsung melalui CSS.
+// Tema ivory dan champagne ditetapkan melalui CSS pada branch dev.
 let isPlaying = false;
 
 function bukaUndangan() {

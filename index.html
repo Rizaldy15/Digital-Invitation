@@ -4,34 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nadia & Aldy — The Wedding</title>
-    <meta name="theme-color" content="#080f1e">
+    <meta name="theme-color" content="#faf6ef">
     <meta name="description" content="Undangan pernikahan Nadia & Aldy • 02 Oktober 2027. Sebuah awal, untuk selamanya.">
 
     <script src="rsvp-config.js"></script>
     <script src="script.js"></script>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="photo-config.css">
+    <link rel="stylesheet" href="photo-layout.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="night-sky" aria-hidden="true"><div class="star-field"></div><i class="meteor meteor-one"></i><i class="meteor meteor-two"></i><i class="meteor meteor-three"></i></div>
+<body class="photo-layout">
 
     <!-- ============================
          BAGIAN COVER & NAMA TAMU
          ============================ -->
     <div id="cover">
-        <div class="celestial-seal" aria-hidden="true">N<span>✦</span>A</div>
+    <div class="night-sky" aria-hidden="true"><div class="star-field"></div><i class="meteor meteor-one"></i><i class="meteor meteor-two"></i><i class="meteor meteor-three"></i></div>
+        <div class="cover-copy">
         <p class="eyebrow">THE WEDDING OF</p>
         <h1>Nadia <em>&</em> Aldy</h1>
-        <div class="star-divider" aria-hidden="true">✧ ─── ✦ ─── ✧</div>
         <p>02 Oktober 2027</p>
         <p>Dengan hormat, kami mengundang</p>
         <div class="guest-name" id="guest-name">Tamu Undangan</div>
         <button class="btn" onclick="bukaUndangan()">Buka Undangan <span aria-hidden="true">↗</span></button>
         <p class="cover-note">SEBUAH AWAL, UNTUK SELAMANYA</p>
+        </div>
     </div>
+    <aside class="desktop-photo" aria-hidden="true"><div><p class="eyebrow">THE WEDDING OF</p><p class="desktop-names">Nadia <em>&</em> Aldy</p><p class="desktop-date">02 OKTOBER 2027</p><p class="desktop-caption">Sebuah awal, untuk selamanya.</p></div></aside>
 
 <!-- ============================
          MUSIK LATAR
@@ -47,7 +50,7 @@
             <a class="text-link" href="#acara">Lihat rangkaian acara ↓</a>
         </header>
         <!-- Level 1: Kutipan (Quote) -->
-        <section class="reveal">
+        <section class="reveal quote-section">
             <p class="eyebrow">A LOVE WRITTEN IN THE STARS</p><h2>Dalam ikatan cinta</h2>
             <p><i>"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya..."</i></p>
             <p><b>(QS. Ar-Rum: 21)</b></p>
@@ -171,11 +174,11 @@
             </details>
         </section>
 
-        <footer><span class="star-divider" aria-hidden="true">✧</span>
+        <footer class="closing-photo"><div class="closing-copy"><span class="star-divider" aria-hidden="true">✧</span>
             <p>Terima kasih atas doa dan kasih yang menyertai.</p>
             <h2>Nadia & Aldy</h2>
             <p class="eyebrow">SAMPAI BERTEMU DI HARI BAHAGIA KAMI</p>
-        </footer>
+        </div></footer>
     </main>
     <nav class="bottom-nav" aria-label="Navigasi undangan"><a href="#beranda">Beranda</a><a href="#mempelai">Mempelai</a><a href="#acara">Acara</a><a href="#galeri">Galeri</a><a href="#rsvp">RSVP</a></nav>
     <p id="toast" role="status"></p>

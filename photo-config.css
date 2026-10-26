@@ -1,0 +1,24 @@
+/* GANTI FOTO DI SINI. Path dihitung dari lokasi file CSS ini (root proyek).
+   Posisi: angka pertama = kiri/kanan; angka kedua = atas/bawah.
+   Ukuran background "cover" mengisi bidang dan memangkas tepi foto.
+   Tersedia posisi mobile terpisah agar wajah tetap terlihat di HP. */
+:root {
+    --photo-cover: url('images/batamu_spc.jpg');
+    --position-cover: 50% 48%;
+    --position-cover-mobile: 50% 45%;
+
+    --photo-opening: url('images/blok-m.jpg');
+    --position-opening: 50% 50%;
+    --position-opening-mobile: 50% 45%;
+
+    --photo-event: url('images/pnck.jpg');
+    --position-event: 50% 45%;
+    --position-event-mobile: 50% 40%;
+
+    --photo-closing: url('images/batamu_spc.jpg');
+    --position-closing: 50% 55%;
+    --position-closing-mobile: 50% 50%;
+
+    --photo-desktop: var(--photo-cover);
+    --position-desktop: 50% 45%;
+}
