@@ -940,3 +940,11 @@ input:disabled { opacity: .45; }
     .venue-section .map-container { height: 260px; border-radius: 4px; }
     .gallery-section .gallery-grid { gap: 12px; }
 }
+
+/* Connected RSVP is isolated in a Google Apps Script frame. */
+#rsvp-form[hidden], #rsvp-connected[hidden] { display: none; }
+.rsvp-frame { display: block; width: 100%; height: 1120px; border: 0; border-radius: 4px; background: #101a2c; margin-top: 28px; }
+#rsvp-connected .form-note a { color: var(--gold); text-underline-offset: 3px; }
+@media (max-width: 600px) {
+    .rsvp-frame { height: 1180px; }
+}

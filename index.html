@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#080f1e">
     <meta name="description" content="Undangan pernikahan Nadia & Aldy • 02 Oktober 2027. Sebuah awal, untuk selamanya.">
 
+    <script src="rsvp-config.js"></script>
     <script src="script.js"></script>
 
     <link rel="stylesheet" href="style.css">
@@ -82,7 +83,7 @@
                 <div class="time-box"><span id="detik">00</span>Detik</div>
             </div>
 
-            <p class="event-intro">Dengan memohon rahmat dan rida Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam rangkaian pernikahan kami.</p>
+            <p class="event-intro">Dengan memohon rahmat dan ridha Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam rangkaian pernikahan kami.</p>
             <div class="event-grid">
                 <article class="event-card event-akad" aria-labelledby="akad-title">
                     <div class="event-crest" aria-hidden="true"><svg viewBox="0 0 64 48" fill="none"><circle cx="24" cy="29" r="14"/><circle cx="40" cy="29" r="14"/><path d="m27 9 5-6 5 6-5 6-5-6ZM32 0v-3M19 7l-4-4M45 7l4-4"/></svg></div>
@@ -137,6 +138,7 @@
         <!-- Level 2: RSVP -->
         <section class="reveal" id="rsvp">
             <p class="eyebrow">YOUR PRESENCE IS OUR PRESENT</p><h2>Hadir & mendoakan</h2><p>Kehadiran Anda akan melengkapi kebahagiaan kami.</p>
+            <div id="rsvp-connected" hidden></div>
             <form id="rsvp-form">
                 <label for="nama">Nama lengkap</label><input type="text" autocomplete="name" id="nama" placeholder="Nama Anda" required>
                 <label for="kehadiran">Konfirmasi kehadiran</label><select id="kehadiran" required>

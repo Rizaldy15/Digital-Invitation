@@ -161,3 +161,40 @@ document.addEventListener('DOMContentLoaded', function() {
     music.addEventListener('pause', syncMusic);
     syncMusic();
 });
+
+
+// Google-hosted form uses google.script.run inside its own frame.
+// No no-cors fetch or assumed success response is used on GitHub Pages.
+document.addEventListener('DOMContentLoaded', function connectRsvp() {
+    const endpoint = String(window.RSVP_WEB_APP_URL || '').trim();
+    if (!endpoint) return;
+    let url;
+    try {
+        url = new URL(endpoint);
+        if (url.origin !== 'https://script.google.com' || !/^\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url.pathname)) throw new Error('Invalid deployment URL');
+    } catch (error) {
+        document.getElementById('rsvp-status').textContent = 'Formulir sementara belum tersedia. Silakan coba lagi nanti.';
+        console.error('RSVP: gunakan URL deployment Apps Script https://script.google.com/macros/s/.../exec');
+        return;
+    }
+    const guestName = new URLSearchParams(window.location.search).get('to');
+    if (guestName) url.searchParams.set('to', guestName.slice(0, 100));
+    const host = document.getElementById('rsvp-connected');
+    const frame = document.createElement('iframe');
+    frame.title = 'Formulir RSVP dan ucapan untuk Nadia dan Aldy';
+    frame.className = 'rsvp-frame';
+    frame.loading = 'lazy';
+    frame.src = url.href;
+    const help = document.createElement('p');
+    help.className = 'form-note';
+    help.append('Jika formulir tidak muncul, ');
+    const link = document.createElement('a');
+    link.href = url.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'buka RSVP di tab baru ↗';
+    help.append(link);
+    host.append(frame, help);
+    host.hidden = false;
+    document.getElementById('rsvp-form').hidden = true;
+});
