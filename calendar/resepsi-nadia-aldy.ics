@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nadia Aldy//Wedding Invitation//ID
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:resepsi-20271002@rizaldy15.github.io
+DTSTAMP:20261026T000000Z
+DTSTART:20271002T040000Z
+DTEND:20271002T070000Z
+SUMMARY:Resepsi - Nadia & Aldy
+DESCRIPTION:Undangan pernikahan Nadia & Aldy. Resepsi pukul 11.00–14.00 W
+ IB. Lihat undangan untuk informasi lokasi terbaru.
+URL:https://rizaldy15.github.io/Digital-Invitation/
+END:VEVENT
+END:VCALENDAR

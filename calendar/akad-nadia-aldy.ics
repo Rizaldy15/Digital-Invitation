@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nadia Aldy//Wedding Invitation//ID
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:akad-20271002@rizaldy15.github.io
+DTSTAMP:20261026T000000Z
+DTSTART:20271002T030000Z
+SUMMARY:Akad Nikah - Nadia & Aldy
+DESCRIPTION:Undangan pernikahan Nadia & Aldy. Akad pukul 10.00 WIB sampai s
+ elesai. Waktu selesai belum ditentukan. Lihat undangan untuk informasi lok
+ asi terbaru.
+URL:https://rizaldy15.github.io/Digital-Invitation/
+END:VEVENT
+END:VCALENDAR

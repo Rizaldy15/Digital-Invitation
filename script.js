@@ -20,8 +20,6 @@ function bukaUndangan() {
     cover.addEventListener('transitionend', onCoverTransitionEnd);
     // Fallback also handles a motion preference changed during the transition.
     window.setTimeout(finishOpening, reducedMotion ? 0 : 1400);
-    const musicBtn = document.getElementById('music-btn');
-    const music = document.getElementById('bg-music');
 
     // Aktifkan section pertama segera setelah cover dibuka. Section berikutnya
     // tetap muncul satu per satu ketika tamu menggulir halaman.
@@ -33,17 +31,6 @@ function bukaUndangan() {
         });
     });
 
-    const playPromise = music.pause();
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            isPlaying = true;
-        }).catch(() => {
-            isPlaying = false;
-            musicBtn.innerText = '🔇';
-        });
-    } else {
-        isPlaying = true;
-    }
 }
 
 function toggleMusic() {
@@ -89,12 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const to = urlParams.get('to');
     if (to && document.getElementById('guest-name')) {
-        document.getElementById('guest-name').innerText = to.replace(/\+/g, ' ');
+        document.getElementById('guest-name').innerText = to;
     }
 
 
     // Penghitung Mundur (Countdown)
-    const targetDate = new Date("2027-10-02T08:00:00+07:00").getTime();
+    const targetDate = new Date("2027-10-02T10:00:00+07:00").getTime();
     const countdownEl = document.getElementById("countdown");
     if (countdownEl) {
         const updateCountdown = function() {
@@ -134,6 +121,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // No success message until a real delivery service is configured.
     document.getElementById('rsvp-form').addEventListener('submit', e => e.preventDefault());
+    if (to) document.getElementById('nama').value = to;
+    const attendance = document.getElementById('kehadiran');
+    const guestCount = document.getElementById('jumlah-tamu');
+    attendance.addEventListener('change', () => {
+        const attending = attendance.value === 'Hadir';
+        guestCount.disabled = !attending;
+        guestCount.required = attending;
+    });
     const field = document.querySelector('.star-field');
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < 95; i++) {

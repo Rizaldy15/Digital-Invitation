@@ -803,3 +803,140 @@ footer .eyebrow {
 }
 
 }
+/* Wedding chapters: photo opening, ceremonial cards, and a quieter venue panel. */
+.opening-photo {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 850px;
+    min-height: min(920px, 100svh);
+    padding-inline: 28px;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--line);
+}
+.opening-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: url('images/batamu_spc.jpg') center 45% / cover no-repeat;
+    opacity: .64;
+}
+.opening-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, #080f1e85, #080f1e70 35%, #080f1ee8 85%, var(--bg));
+}
+.opening-photo h2 { text-shadow: 0 4px 30px #0008; }
+.opening-photo p.intro-copy { color: var(--text); }
+#acara {
+    max-width: 960px;
+    padding: 38px 18px 24px;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+}
+#acara::before { content: '✧ ─── ✦ ─── ✧'; letter-spacing: .18em; }
+#acara .event-intro {
+    max-width: 530px;
+    font-size: 12px;
+    line-height: 2;
+    margin-bottom: 44px;
+}
+#acara .countdown-wrapper { margin-bottom: 28px; }
+.event-grid { gap: 30px; align-items: stretch; }
+.event-card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding: 48px 30px 34px;
+    border: 1px solid #d8bc8066;
+    border-radius: 180px 180px 8px 8px;
+    background: radial-gradient(ellipse at 50% 0%, #b9914933, transparent 65%), linear-gradient(160deg, #19273b, #0d1728 75%);
+    box-shadow: 0 25px 65px #0003;
+}
+.event-card::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid #d8bc8033;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+}
+.event-card::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 65px;
+    opacity: .35;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23d8bc80' stroke-width='.6'%3E%3Cpath d='M0 24 24 0 48 24 24 48ZM12 24 24 12 36 24 24 36ZM0 48 24 24 48 48'/%3E%3C/g%3E%3C/svg%3E");
+    mask-image: linear-gradient(transparent, #000);
+}
+.event-resepsi {
+    background: radial-gradient(ellipse at 50% 0%, #bb85512b, transparent 65%), linear-gradient(160deg, #3b202c, #171827 75%);
+}
+.event-crest { width: 60px; height: 64px; margin-bottom: 12px; }
+.event-crest svg { width: 100%; height: 100%; stroke: var(--gold); stroke-width: 1.2; }
+.event-card p.eyebrow { font-size: 9px; color: var(--gold); letter-spacing: .25em; }
+.event-card h3 { font: 48px 'Cormorant Garamond', Georgia, serif; color: var(--gold-light); margin: 12px 0 28px; }
+.event-date { display: grid; grid-template-columns: 1fr 1.2fr 1fr; align-items: center; width: 100%; max-width: 290px; margin-bottom: 23px; }
+.event-date > span { font-size: 10px; letter-spacing: .08em; line-height: 1.8; }
+.event-date > span:first-child { border-block: 1px solid var(--line); padding-block: 9px; }
+.event-date > span:last-child { border-block: 1px solid var(--line); padding-block: 9px; }
+.event-date strong { font: 88px/.9 'Cormorant Garamond', Georgia, serif; color: var(--gold-light); }
+.event-date b { display: block; font-weight: 400; }
+.event-card p.event-time { color: var(--text); font-size: 15px; letter-spacing: .03em; }
+.event-time span { font-size: 11px; color: var(--muted); }
+.event-rule { display: flex; align-items: center; gap: 14px; color: var(--gold); width: 65%; margin: 20px 0 14px; font-size: 11px; }
+.event-rule::before, .event-rule::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.event-card p.event-caption { line-height: 1.9; font-size: 11px; }
+.event-card .btn { width: 100%; max-width: 260px; margin-top: 26px; font-size: 10px; }
+.event-location { font-size: 10px; color: var(--gold); text-underline-offset: 5px; margin-top: 17px; padding: 7px; }
+#acara .event-footnote { font-size: 10px; margin: 24px 0 0; color: var(--muted); }
+.venue-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    padding: 46px 38px;
+    text-align: left;
+    background: linear-gradient(125deg, #182439, #0e1728);
+}
+.venue-section::before { display: none; }
+.venue-section h2 { font-size: 41px; margin-bottom: 24px; }
+.venue-section .venue-name { color: var(--gold-light); font: 24px 'Cormorant Garamond', Georgia, serif; margin-bottom: 10px; }
+.venue-copy > p:not(.eyebrow):not(.venue-name) { color: var(--muted); font-size: 12px; }
+.venue-section .map-container { height: 340px; margin: 0; border-radius: 130px 130px 4px 4px; }
+.gallery-section { background: transparent; border-inline: 0; }
+.gallery-section .gallery-grid { gap: 22px; }
+.gift-section { background: linear-gradient(145deg, #301e2a80, #101a2c); padding-block: 45px; }
+.gift-section h2 { margin-bottom: 18px; }
+.gift-section > p:not(.eyebrow) { font-size: 12px; max-width: 450px; }
+.gift-details { max-width: 430px; margin: 25px auto 0; }
+.gift-details summary { padding: 15px 20px; border: 1px solid var(--line); color: var(--gold); cursor: pointer; font-size: 12px; text-align: left; }
+.gift-details summary span { float: right; }
+.gift-details[open] summary span { transform: rotate(45deg); }
+.gift-details .bank-box { margin-top: 14px; }
+input:disabled { opacity: .45; }
+@media (max-width: 600px) {
+    .opening-photo { margin-inline: -18px; margin-bottom: 35px; min-height: 85svh; padding-inline: 20px; }
+    #acara { padding: 28px 0 20px; }
+    #acara h2 { font-size: 42px; }
+    #acara .event-intro { padding-inline: 8px; }
+    .event-grid { gap: 24px; }
+    .event-card { padding: 42px 30px 32px; max-width: 400px; width: 100%; margin-inline: auto; }
+    .event-card h3 { font-size: 46px; }
+    .event-date strong { font-size: 80px; }
+    .venue-section { grid-template-columns: 1fr; padding: 35px 24px; gap: 28px; text-align: center; }
+    .venue-section h2 { font-size: 38px; }
+    .venue-section .map-container { height: 260px; border-radius: 4px; }
+    .gallery-section .gallery-grid { gap: 12px; }
+}
