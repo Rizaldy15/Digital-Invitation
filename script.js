@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Penghitung Mundur (Countdown)
-    const targetDate = new Date("2026-12-31T08:00:00+07:00").getTime();
+    const targetDate = new Date("2027-10-02T08:00:00+07:00").getTime();
     const countdownEl = document.getElementById("countdown");
     if (countdownEl) {
         const updateCountdown = function() {
