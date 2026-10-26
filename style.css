@@ -1,18 +1,5 @@
 /* Celestial invitation: champagne foil, midnight sky, generous editorial spacing. */
 :root {
-    --bg:#f5f0e7;
-    --text:#302f36;
-    --muted:#68616a;
-    --gold:#87652d;
-    --gold-light:#b78c49;
-    --panel:rgba(255,252,246,.88);
-    --line:rgba(135,101,45,.28);
-    --field:#fffaf1;
-    --sky-star:#947139;
-    color-scheme:light
-}
-
-[data-theme="dark"] {
     --bg:#080f1e;
     --text:#f5eddf;
     --muted:#b3b7c3;
@@ -579,7 +566,7 @@ footer>p:not(.eyebrow) {
     font-size:12px;
     color:var(--muted)
 }
-#theme-toggle,#music-btn {
+#music-btn {
     position:fixed;
     z-index:30;
     right:22px;
@@ -592,9 +579,6 @@ footer>p:not(.eyebrow) {
     background:var(--panel);
     color:var(--gold);
     font-size:16px
-}
-#theme-toggle {
-    top:22px
 }
 #music-btn {
     bottom:92px;
@@ -765,10 +749,6 @@ section p i {
 }
 .bank-box {
     padding:24px 18px
-}
-#theme-toggle {
-    right:20px;
-    top:20px
 }
 #music-btn {
     right:16px

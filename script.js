@@ -1,41 +1,5 @@
-// ============================
-// 1. PENGATURAN TEMA (Jalan paling awal agar tidak berkedip)
-// ============================
-(function() {
-    try {
-        const saved = localStorage.getItem('theme');
-
-        if (saved !== 'light') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-    } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
-})();
-
-// ============================
-// 2. FUNGSI GLOBAL (Bisa diakses langsung oleh tombol HTML)
-// ============================
+// Tema biru malam ditetapkan langsung melalui CSS.
 let isPlaying = false;
-
-function setToggleIcon() {
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    if (themeToggleBtn) {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        themeToggleBtn.innerText = isDark ? '☼' : '☾';
-        themeToggleBtn.setAttribute('aria-label', isDark ? 'Aktifkan tema terang' : 'Aktifkan tema gelap');
-    }
-}
-
-function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        try { localStorage.setItem('theme', 'light'); } catch (e) {}
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        try { localStorage.setItem('theme', 'dark'); } catch (e) {}
-    }
-    setToggleIcon();
-}
 
 function bukaUndangan() {
     if (document.body.classList.contains('invitation-open')) return;
@@ -69,13 +33,11 @@ function bukaUndangan() {
         });
     });
 
-    const playPromise = music.play();
+    const playPromise = music.pause();
     if (playPromise !== undefined) {
         playPromise.then(() => {
             isPlaying = true;
         }).catch(() => {
-            // Beberapa browser memblokir autoplay. Tombol tetap tersedia agar
-            // tamu dapat menyalakan musik secara manual.
             isPlaying = false;
             musicBtn.innerText = '🔇';
         });
@@ -130,8 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('guest-name').innerText = to.replace(/\+/g, ' ');
     }
 
-    // Set ikon yang benar saat halaman pertama kali dimuat
-    setToggleIcon();
 
     // Penghitung Mundur (Countdown)
     const targetDate = new Date("2026-12-31T08:00:00+07:00").getTime();
