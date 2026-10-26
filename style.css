@@ -396,16 +396,17 @@ section p b {
 .person {
     padding:12px
 }
-.portrait-monogram {
+.portrait-photo {
+    width:100%;
     height:210px;
     max-width:180px;
-    display:grid;
-    place-items:center;
+    display:block;
+    object-fit:cover;
+    object-position:center top;
+    padding:5px;
     margin:auto;
     border:1px solid var(--line);
     border-radius:100px 100px 2px 2px;
-    font:80px 'Cormorant Garamond',serif;
-    color:var(--gold);
     background:radial-gradient(ellipse at 50% 30%,#b995561c,transparent 70%);
     outline:1px solid var(--line);
     outline-offset:-8px
@@ -718,9 +719,8 @@ section p i {
 .person {
     padding:0
 }
-.portrait-monogram {
+.portrait-photo {
     height:165px;
-    font-size:62px
 }
 .person p {
     font-size:10px
