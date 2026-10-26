@@ -187,12 +187,10 @@ document.addEventListener('DOMContentLoaded', function connectRsvp() {
     frame.src = url.href;
     const help = document.createElement('p');
     help.className = 'form-note';
-    // help.append('Jika formulir tidak muncul, ');
     const link = document.createElement('a');
     link.href = url.href;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    // link.textContent = 'buka RSVP di tab baru ↗';
     help.append(link);
     host.append(frame, help);
     host.hidden = false;
